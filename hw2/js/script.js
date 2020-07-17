@@ -26,7 +26,7 @@ let str = prompt("Введите число"),
     numStr = Number(str);
 document.write(typeof numStr);
 document.write("<br>");
-if ((+str[0] + +str[1] + +str[2]) == +(str[3] + +str[4] + +str[5])) {
+if ((+str[0] + +str[1] + +str[2]) == (+str[3] + +str[4] + +str[5])) {
     document.write('da');
 } else {
     document.write('net');
