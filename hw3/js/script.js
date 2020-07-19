@@ -122,6 +122,7 @@ let z = 345,
     strZ = String(z),
     summaZ = 0,
     rev = strZ[2] + strZ[1] + strZ[0];
+console.log("Исходное число: " + z);
 for (let i = 0; i < strZ.length; i++) {
 
     summaZ = 0;
@@ -132,5 +133,5 @@ for (let i = 0; i < strZ.length; i++) {
     console.log(element);
     console.log('Sum ' + element + ' = ' + summaZ);
 }
-console.log('Lenght = ' + strZ.length);
+console.log('Количество цифр = ' + strZ.length);
 console.log(rev);
