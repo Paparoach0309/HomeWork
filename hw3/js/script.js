@@ -120,8 +120,8 @@ d. меняет порядок цифр числа n на обратный.
 
 let z = 345,
     strZ = String(z),
-    summaZ = 0;
-
+    summaZ = 0,
+    rev = strZ[2] + strZ[1] + strZ[0];
 for (let i = 0; i < strZ.length; i++) {
 
     summaZ = 0;
@@ -133,3 +133,4 @@ for (let i = 0; i < strZ.length; i++) {
     console.log('Sum ' + element + ' = ' + summaZ);
 }
 console.log('Lenght = ' + strZ.length);
+console.log(rev);
