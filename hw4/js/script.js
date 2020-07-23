@@ -140,7 +140,10 @@ let arr10 = [1, 8, 0, 13, 76, 8, 7, 0, 22, 0, 2, 3, 2],
     firstInd = arr10.indexOf(0),
     lastInd = arr10.lastIndexOf(0);
 for (let i = 0; i < arr10.length; i++) {
-    summa += arr10[i];
+    if (i > firstInd && i < lastInd) {
+        summa += arr10[i];
+    }
+
 }
 document.write(summa);
 
