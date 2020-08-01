@@ -80,9 +80,9 @@ function triangular(params) {
 triangular();
 
 function revTrian(params) {
-    for (let i = params; i >= 1; i--) {
+    for (let i = params - 1; i >= 1; i--) {
         strin = '';
-        for (let j = 1; j <= params; j++) strin += ' ';
+        for (let j = i; j <= params; j++) strin += ' ';
         for (let j = i + i - 1; j >= 1; j--) strin += "*";
         console.log(strin);
     }
@@ -112,7 +112,7 @@ function validateEmail(email) {
 
         // часть b
         if (email.indexOf('@') < 3) error = true;
-        if (email[0] == Number) error = true; // что не так в условии??
+        if (!isNaN(email[0])) error = true;
         // часть с
 
         if (email[i] == '@' && email[i] == '@') {
