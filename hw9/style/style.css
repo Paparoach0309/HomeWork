@@ -1,0 +1,16 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.todoList {
+    margin: 100px auto 0 auto;
+    max-width: 400px;
+    background-color: #1BA39C;
+    padding: 30px 10px;
+    border-radius: 10px;
+}
+
+.todoList h3 {
+    font-size: 26px;
+}
