@@ -7,10 +7,31 @@
     margin: 100px auto 0 auto;
     max-width: 400px;
     background-color: #1BA39C;
-    padding: 30px 10px;
+    padding: 30px 50px;
     border-radius: 10px;
+}
+
+.todoList input {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.todoList button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
 }
 
 .todoList h3 {
     font-size: 26px;
+    text-align: center;
+}
+
+.todoList li {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.complete {
+    text-decoration: line-through;
 }
