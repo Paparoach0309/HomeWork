@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.field {
+    display: flex;
+    flex-wrap: wrap;
+    height: 500px;
+    width: 500px;
+    background-color: rgb(119, 223, 223);
+    margin: 100px auto;
+}
+
+.cell {
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+}
+
+.snake {
+    background: url(/bus.png);
+    background-size: cover;
+}
