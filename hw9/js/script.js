@@ -16,19 +16,25 @@
      });
 
      function show() {
-         let disp = '';
+         let list = [];
          toDoList.forEach(function(item, i) {
-             disp += `
-         <li>
-        <input type='checkbox' class = 'check' id ='item_${i}'>
-        <label for='item_${i}' class='${item.task}'>${item.task}</label>
-        </li>`;
-             itemTask.innerHTML = disp;
+             let liElem = document.createElement('li');
+             liElem.innerHTML = `
+            <label for='item_${i}' class='${item.task}'>${item.task}</label>`;
 
-             let check = document.querySelector('.check');
-             check.addEventListener('click', function() {
-                 itemTask.classList.toggle('complete');
+             list.push(liElem);
+
+             liElem.addEventListener('click', function() {
+                 this.classList.toggle('complete');
              });
+
+
+             itemTask.innerHTML = '';
+
+             list.forEach(function(li) {
+                 itemTask.appendChild(li);
+             });
+
          });
      }
 
