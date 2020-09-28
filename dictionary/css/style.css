@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 5%;
+}
+
+body, input, button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.dictionary_form input, 
+.dictionary_form button {
+    width: 150px;
+    padding: 10px 10px;
+
+    border: 1px solid #ccc;
+}
+
+.dictionary_form button {
+    background-color: #333;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.dictionary_list ul {
+    list-style: none;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+
+.dictionary_list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #ededed;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.dictionary_list button {
+    width: 60px;
+    border: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #666;
+}
+
+.dictionary_list button:hover {
+    background-color: #666;
+    color: #fff;
+    cursor: pointer;
+}
+
+.word_en {
+    font-weight: bold;
+}
+.word_ru {
+    font-size: 14px;
+}
