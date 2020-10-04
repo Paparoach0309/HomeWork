@@ -1,3 +1,11 @@
+let counter = document.createElement('div');
+document.body.appendChild(counter);
+counter.classList.add('counter');
+let score = 0;
+counter.innerHTML = `
+    ${score}
+`;
+
 let field = document.createElement('div');
 document.body.appendChild(field);
 field.classList.add('field');
@@ -23,20 +31,107 @@ for (let i = 0; i < 100; i++) {
 }
 
 const createSnake = function() {
-    let positionX = 5,
-        positionY = 5;
+    let positionX = Math.round(Math.random() * (10 - 2) + 2),
+        positionY = Math.round(Math.random() * (10 - 1) + 1);
     return [positionX, positionY];
 }
-let snake = document.querySelector('[positionx="5"][positiony="5"]');
-snake.classList.add('snake');
+let start = createSnake();
+let snakeBus = [document.querySelector('[positionx="' + start[0] + '"][positiony="' + start[1] + '"]'), document.querySelector('[positionx="' + (start[0] - 1) + '"][positiony="' + start[1] + '"]')];
+
+for (let i = 0; i < snakeBus.length; i++) {
+    snakeBus[i].classList.add('snake');
+}
 
 let foodBus;
 const createFoodBus = function() {
-    const regenBus = function() {
-        let positionX = Math.round(Math.random() * (10 - 1) + 1),
-            positionY = Math.round(Math.random() * (10 - 1) + 1);
+    function appearFoodBus() {
+        let positionX = Math.round(Math.random() * (10 - 1) + 1);
+        let positionY = Math.round(Math.random() * (10 - 1) + 1);
         return [positionX, positionY];
+    }
+    let foodBusStart = appearFoodBus();
+    foodBus = document.querySelector('[positionX="' + foodBusStart[0] + '"][positionY="' + foodBusStart[1] + '"]');
+    foodBus.classList.add('foodBus');
+
+    while (foodBus === snakeBus) {
+        let foodBusStart = appearFoodBus();
+        foodBus = document.querySelector('[positionX="' + foodBusStart[0] + '"][positionY="' + foodBusStart[1] + '"]');
     }
 }
 
 createFoodBus();
+
+let controls = 'right';
+
+const move = function() {
+    let posXY = [snakeBus[0].getAttribute('positionx'), snakeBus[0].getAttribute('positiony')];
+    snakeBus[snakeBus.length - 1].classList.remove('snake');
+    snakeBus.pop();
+
+    if (controls == 'right') {
+        if (posXY[0] < 10) {
+            snakeBus.unshift(document.querySelector('[positionX="' + (+posXY[0] + 1) + '"][positionY="' + posXY[1] + '"]'));
+        } else {
+            snakeBus.unshift(document.querySelector('[positionX="1"][positionY="' + posXY[1] + '"]'));
+        }
+    }
+
+    if (controls == 'left') {
+        if (posXY[0] > 1) {
+            snakeBus.unshift(document.querySelector('[positionX="' + (+posXY[0] - 1) + '"][positionY="' + posXY[1] + '"]'));
+        } else {
+            snakeBus.unshift(document.querySelector('[positionX="10"][positionY="' + posXY[1] + '"]'));
+        }
+    }
+
+    if (controls == 'up') {
+        if (posXY[1] < 10) {
+            snakeBus.unshift(document.querySelector('[positionX="' + posXY[0] + '"][positionY="' + (+posXY[1] + 1) + '"]'));
+        } else {
+            snakeBus.unshift(document.querySelector('[positionX="' + posXY[0] + '"][positionY="1"]'));
+        }
+    }
+
+    if (controls == 'down') {
+        if (posXY[1] > 1) {
+            snakeBus.unshift(document.querySelector('[positionX="' + posXY[0] + '"][positionY="' + (+posXY[1] - 1) + '"]'));
+        } else {
+            snakeBus.unshift(document.querySelector('[positionX="' + posXY[0] + '"][positionY="10"]'));
+        }
+    }
+
+    if (snakeBus[0].getAttribute('positionX') == foodBus.getAttribute('positionX') && snakeBus[0].getAttribute('positionY') == foodBus.getAttribute('positionY')) {
+        foodBus.classList.remove('foodBus');
+        score++;
+
+        counter.innerHTML = `
+${score}
+`;
+        createFoodBus();
+        snakeBus.push(document.querySelector(snakeBus[snakeBus.length - 1].getAttribute('positionx'), snakeBus[snakeBus.length - 1].getAttribute('positiony')));
+    }
+
+    if (snakeBus[0].classList.contains('snake')) {
+        alert('Game Over. Your score is ${score}');
+        clearInterval(go);
+    }
+
+    for (let i = 0; i < snakeBus.length; i++) {
+        snakeBus[i].classList.add('snake');
+    }
+};
+
+let go = setInterval(move, 500);
+
+window.addEventListener('keydown', event => {
+
+    if (event.key == 'ArrowDown')
+        controls = 'down';
+    else if (event.key == 'ArrowUp')
+        controls = 'up';
+    else if (event.key == 'ArrowLeft')
+        controls = 'left';
+    else if (event.key == 'ArrowRight')
+        controls = 'right';
+
+});

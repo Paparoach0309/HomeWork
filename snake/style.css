@@ -23,3 +23,21 @@
     background: url(/bus.png);
     background-size: cover;
 }
+
+.foodBus {
+    background: url(/bus.png);
+    background-size: cover;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #33936a;
+    background-color: rgb(119, 223, 223);
+    margin: 80px auto;
+}
