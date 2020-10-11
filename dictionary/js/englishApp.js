@@ -40,8 +40,8 @@ const englishApp = _ => {
         const inputWordRu = dictionary.querySelector('input[name="word_ru"]');
         const inputWordEn = dictionary.querySelector('input[name="word_en"]');
 
-        inputWordRu.value = words[id].name;
-        inputWordEn.value = words[id].name;
+        inputWordRu.value = words[id].ru;
+        inputWordEn.value = words[id].en;
     };
 
     const add = event => {

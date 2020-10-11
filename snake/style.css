@@ -10,7 +10,7 @@
     height: 500px;
     width: 500px;
     background-color: rgb(119, 223, 223);
-    margin: 100px auto;
+    margin: 60px auto;
 }
 
 .cell {
@@ -24,9 +24,16 @@
     background-size: cover;
 }
 
+.snakeLeft {
+    background: url(/bus.png);
+    background-size: cover;
+    transform: rotateY(180deg);
+}
+
 .foodBus {
     background: url(/bus.png);
     background-size: cover;
+    border-radius: 50%;
 }
 
 .counter {
@@ -39,5 +46,5 @@
     font-weight: bold;
     color: #33936a;
     background-color: rgb(119, 223, 223);
-    margin: 80px auto;
+    margin: 20px auto;
 }

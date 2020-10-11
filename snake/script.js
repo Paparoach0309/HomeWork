@@ -82,6 +82,7 @@ const move = function() {
         } else {
             snakeBus.unshift(document.querySelector('[positionX="10"][positionY="' + posXY[1] + '"]'));
         }
+
     }
 
     if (controls == 'up') {
@@ -105,14 +106,17 @@ const move = function() {
         score++;
 
         counter.innerHTML = `
-${score}
-`;
+        ${score}
+        `;
+
+        let lastPositionX = snakeBus[snakeBus.length - 1].getAttribute('positionx');
+        let lastPositionY = snakeBus[snakeBus.length - 1].getAttribute('positiony');
+        snakeBus.push(document.querySelector('[positionX = "' + lastPositionX + '"][positionY = "' + lastPositionY + '"]'));
         createFoodBus();
-        snakeBus.push(document.querySelector(snakeBus[snakeBus.length - 1].getAttribute('positionx'), snakeBus[snakeBus.length - 1].getAttribute('positiony')));
     }
 
     if (snakeBus[0].classList.contains('snake')) {
-        alert('Game Over. Your score is ${score}');
+        alert('Game Over. Your score is ' + score);
         clearInterval(go);
     }
 
@@ -125,13 +129,13 @@ let go = setInterval(move, 500);
 
 window.addEventListener('keydown', event => {
 
-    if (event.key == 'ArrowDown')
+    if (event.key == 'ArrowDown' && controls != 'up')
         controls = 'down';
-    else if (event.key == 'ArrowUp')
+    else if (event.key == 'ArrowUp' && controls != 'down')
         controls = 'up';
-    else if (event.key == 'ArrowLeft')
+    else if (event.key == 'ArrowLeft' && controls != 'right')
         controls = 'left';
-    else if (event.key == 'ArrowRight')
+    else if (event.key == 'ArrowRight' && controls != 'left')
         controls = 'right';
 
 });
