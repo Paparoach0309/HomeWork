@@ -1,0 +1,44 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #ededed;
+    padding: 5% 10%;
+}
+
+.header .conteiner {
+    display: flex;
+    align-items: center;
+}
+
+.nav {
+    margin-left: auto;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav li {
+    margin-right: 30px;
+    padding: 30px 20px;
+    background-color: #212690;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.main {
+    overflow: hidden;
+}
+
+.main h1 {
+    text-align: center;
+    margin: 30px 0;
+}
