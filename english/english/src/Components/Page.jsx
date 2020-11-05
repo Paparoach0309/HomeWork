@@ -4,10 +4,14 @@ class Page extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: true
+            isOpen: true,
+            translation: '',
+            value: '',
+            library: localStorage.getItem('library') || [{id: 0, word:'', translate:''}]
         }
         this.changeMode = this.changeMode.bind(this)
         this.getValue = this.getValue.bind(this)
+        this.addWordToLibrary = this.addWordToLibrary.bind(this)
     }
     changeMode() {
         this.setState(prevState => ({
@@ -15,18 +19,34 @@ class Page extends React.Component {
         }))
     }
 
-    async getValue(event) {
-        console.log(event.currentTarget.value)
-        const response = await fetch("http://tmp.myitschool.org/API/translate/?word=привет", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "systran-systran-platform-for-language-processing-v1.p.rapidapi.com",
-                "x-rapidapi-key": "db35ef67fbmsh4fec96408a53a99p183b29jsn97abaa7bea3b"
-            }
-        })
-        const result = await response.json()
-        console.log(result)
+    addWordToLibrary() {
+        this.setState(prevState => ({
+            library: [...prevState.library, {id: 'this.state.value.length', word: 'this.state.value', translate: 'this.state.value'}]
+        }))
+        console.log(this.state)
     }
+     async getValue(event) {
+        const value = event.currentTarget.value
+            this.setState(() => ({
+            value: value
+            }))
+        try {
+            const response = await fetch(`http://tmp.myitschool.org/API/translate/?&sourse=en&target=ru&word=${value}`) 
+        
+            const result = await response.json();
+            
+            if (result.translate) {
+                await this.setState(() => ({
+                translation: result.translate
+                }))
+            }
+            console.log(result.translate);
+            }
+            catch (error) {
+                console.log(error);
+            }
+    }
+        
 
     render() {
         return (
@@ -39,7 +59,8 @@ class Page extends React.Component {
                         </div> :
                         <div>
                             <input onChange={this.getValue} className="" placeholder="Enter new word"/>
-                            <button onClick={this.changeMode} className="btn-round check">✔</button>
+                            <span>{this.state.translation}</span>
+                            <button onClick={this.addWordToLibrary} className="btn-round check">✔</button>
                         </div>
                     }
                 </div>
