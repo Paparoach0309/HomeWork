@@ -23,15 +23,17 @@
   padding: 250px 0 0 0;
 }
 
-.nav-container li{
+.nav-container a{
   padding: 15px;
   font-style: normal;
   font-weight: normal;
   font-style: 24px;
   line-height: 28px;
+  text-decoration: none;
+  color: white;
 }
 
-.active {
+a.active {
   background: #f9f8ff;
   color: #20b887;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -69,10 +71,15 @@
   border-radius: 50%;
 }
 
-.btn-round.add {
+.btn-round.add , .btn-round.close{
   background-image: url("./img/add.svg");
   background-position: center;
   background-repeat: no-repeat;
+  transition: .2s linear;
+}
+
+.close {
+  transform: rotate(45deg);
 }
 
 .app-wrapper {
@@ -89,7 +96,7 @@
 }
 
 .add-word-container input {
-  padding: 8px 13px;
+  padding: 11px 32px;
 }
 
 .add-word-container div {
@@ -116,4 +123,222 @@
   box-sizing: border-box;
   color: #fff;
   font-size: 24px;
+}
+
+.library-container {
+  background: rgba(242, 246, 254, 0.46);
+  border: 1px solid rgba(0, 0, 0, 0.85);
+  box-sizing: border-box;
+}
+
+.library-container > div > div {
+  padding: 15px;
+  text-align: center;
+}
+
+.library-container > div:not(.library-header) > div:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20px;
+  width: 3px;
+  background: rgba(242, 246, 254, 0.46);
+  height: 100%;
+}
+
+.library-container > div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  column-gap: 20px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 20px;
+  color: #036344;
+}
+
+.library-header > div::after {
+  content: '';
+  position: absolute;
+  height: 16px;
+  width: 80%;
+  left: 14px;
+  bottom: 8px;
+  background: rgba(242, 100, 94, 0.09);
+}
+
+.library-header > div {
+  position: relative;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 21px;
+  color: #992e00;
+}
+
+.score {
+  position: absolute;
+  left: 350px;
+  color: darkgreen;
+  top: 20px;
+}
+
+.add-word-container {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: end;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.page-container{
+  display: grid;
+  justify-content: center;
+  align-items: srart;
+  grid-auto-flow: row;
+  align-content: flex-start;
+  row-gap: 68px;
+}
+
+.learn-container {
+  display: grid;
+  grid-row-gap: 60px;
+  row-gap: 60px;
+  position: relative;
+  background: rgba(242, 246, 254, 0.46);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  padding: 60px 120px;
+}
+
+.percentage {
+position: absolute;
+background: #f26c5e;
+color: white;
+font-size: 24px;
+line-height: 28px;
+top: -15px;
+left: -15px;
+padding: 4px 15px;
+}
+
+.word-translation {
+  font-size: 72px;
+  line-height: 84px;
+  color: #00402b;
+}
+
+.word {
+  font-size: 48px;
+  line-height: 56px;
+  color: #1aad7e;
+}
+
+.description-label {
+  top: -18px;
+  left: 0;
+  position: absolute;
+  font-size: 18px;
+  line-height: 21px;
+  color: rgba(0, 0, 0, 0.52);
+}
+
+.learn-wrapper {
+  display: grid;
+  align-items: center;
+  align-content: start;
+  margin-top: 117px;
+  justify-content: center;
+  row-gap: 30px;
+}
+
+.btn-next {
+  justify-self: end;
+  padding: 4px 48px;
+  background-color: #0c9267;
+  color: white;
+}
+
+.btn-next:hover {
+  cursor: pointer;
+}
+
+.word-container {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+  text-align: center;
+  padding: 15px;
+}
+
+.btn-repeat {
+  background-color: #0c9267;
+  color: white;
+  padding: 20px;
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+  font-size: 40px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+}
+
+.btn-repeat:hover {
+  cursor: pointer;
+}
+
+.mode-container > div:first-child {
+  display: grid;
+  align-items: space-between;
+  max-width: 280px;
+}
+
+.mode-container:hover {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.mode-container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  padding: 25px 55px 55px 55px;
+  margin: 15px auto;
+}
+
+.easy-mode {
+  background: rgba(215, 220, 255, 0.46);
+}
+
+.hard-mode {
+  background: rgba(176, 222, 255, 0.46);
+}
+
+.mode-title {
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  color: #036344;
+}
+
+.mode-description {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.easy-mode .mode-description {
+  color: #1b81df;
+}
+
+.hard-mode .mode-description {
+  color: #1b46df;
+}
+
+.mode-page {
+  display: grid;
+  align-items: start;
+  margin: 130px auto;
 }

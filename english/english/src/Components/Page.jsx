@@ -7,31 +7,37 @@ class Page extends React.Component {
             isOpen: true,
             translation: '',
             value: '',
-            library: localStorage.getItem('library') || [{id: 0, word:'', translate:''}]
+            library: JSON.parse(localStorage.getItem('library')) || [{id: 0, word:'', translate:''}]
         }
         this.changeMode = this.changeMode.bind(this)
         this.getValue = this.getValue.bind(this)
         this.addWordToLibrary = this.addWordToLibrary.bind(this)
+        this.removeWordLibrary = this.removeWordLibrary.bind(this)
     }
+    componentDidMount() {
+            document.addEventListener('keydown', (event) => {
+                if(this.state.value.length > 0 && this.state.isOpen && event.key === 'Enter') {
+                    this.addWordToLibrary()
+                }
+            })
+    }
+
     changeMode() {
         this.setState(prevState => ({
             isOpen: !prevState.isOpen
         }))
     }
 
-    addWordToLibrary() {
-        this.setState(prevState => ({
-            library: [...prevState.library, {id: 'this.state.value.length', word: 'this.state.value', translate: 'this.state.value'}]
+    async removeWordLibrary(index) {
+        await this.setState(prevState => ({
+            library: prevState.library.filter((word, i) => i !== index)
         }))
-        console.log(this.state)
+        await localStorage.setItem('library', JSON.stringify(this.state.library)) 
     }
-     async getValue(event) {
-        const value = event.currentTarget.value
-            this.setState(() => ({
-            value: value
-            }))
+
+    async addWordToLibrary() {
         try {
-            const response = await fetch(`http://tmp.myitschool.org/API/translate/?&sourse=en&target=ru&word=${value}`) 
+            const response = await fetch(`http://tmp.myitschool.org/API/translate/?&sourse=en&target=ru&word=${this.state.value}`) 
         
             const result = await response.json();
             
@@ -40,30 +46,67 @@ class Page extends React.Component {
                 translation: result.translate
                 }))
             }
-            console.log(result.translate);
+            await this.setState(prevState => ({
+                library: [...prevState.library, {id: this.state.library.length, word: this.state.value, translate: this.state.translation}]
+            }))
+            await localStorage.setItem('library', JSON.stringify(this.state.library)) 
+            await this.changeMode()
+            await this.setState(() => ({
+                translation: ''
+                }))
+
             }
             catch (error) {
-                console.log(error);
+                console.log(error)
             }
+    }
+     async getValue(event) {
+        const value = event.currentTarget.value
+            this.setState(() => ({
+            value: value
+            }))
+        
     }
         
 
     render() {
         return (
-            <div>
+            <div className="page-container">
                 <div className="add-word-container">
-                    {this.state.isOpen ? 
+                    {!this.state.isOpen ? 
+                        <span className="label-title">Add new word</span> :
                         <div>
-                            <span className="label-title">Add new word</span>
-                            <button onClick={this.changeMode} className="btn-round add"></button>
-                        </div> :
-                        <div>
-                            <input onChange={this.getValue} className="" placeholder="Enter new word"/>
+                            <input onChange={this.getValue} placeholder="Enter new word"/>
                             <span>{this.state.translation}</span>
                             <button onClick={this.addWordToLibrary} className="btn-round check">✔</button>
                         </div>
                     }
+                    <button onClick={this.changeMode} className={this.state.isOpen ? "btn-round close" : "btn-round add"}></button>
+                        
                 </div>
+
+                    <div className="library-container">
+                        <div className="library-header">
+                            <div>Word</div>
+                            <div>Translate</div>
+                            <div>Learn level</div>
+                        </div>
+                        {this.state.library.map((word, index) => (
+                            <div key={index}>
+                                <div>
+                                    {word.id}
+                                </div>
+                                <div>
+                                    {word.word}
+                                </div>
+                                <div>
+                                    {word.translate}
+                                </div>
+                                <div onClick={() => this.removeWordLibrary(index)}>Delete</div>
+                            </div>
+                        ))}
+                        
+                    </div>
             </div>
         )
     }
