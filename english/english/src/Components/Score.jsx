@@ -5,7 +5,7 @@ const Score = (props) => {
         <span className="score">
             Score: {props.score}
         </span>
-    )
-}
+    );
+};
 
 export default Score;

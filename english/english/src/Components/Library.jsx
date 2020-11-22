@@ -8,31 +8,34 @@ class Page extends React.Component {
             translation: '',
             value: '',
             library: JSON.parse(localStorage.getItem('library')) || [{id: 0, word:'', translate:''}]
-        }
-        this.changeMode = this.changeMode.bind(this)
-        this.getValue = this.getValue.bind(this)
-        this.addWordToLibrary = this.addWordToLibrary.bind(this)
-        this.removeWordLibrary = this.removeWordLibrary.bind(this)
+        };
+        this.wordsRef = Array(this.state.library.length);
+        this.changeMode = this.changeMode.bind(this);
+        this.getValue = this.getValue.bind(this);
+        this.addWordToLibrary = this.addWordToLibrary.bind(this);
+        this.removeWordLibrary = this.removeWordLibrary.bind(this);
+        this.checkWord = this.checkWord.bind(this);
     }
     componentDidMount() {
             document.addEventListener('keydown', (event) => {
                 if(this.state.value.length > 0 && this.state.isOpen && event.key === 'Enter') {
-                    this.addWordToLibrary()
-                }
-            })
+                    this.addWordToLibrary();
+                };
+            });
     }
 
     changeMode() {
         this.setState(prevState => ({
             isOpen: !prevState.isOpen
-        }))
+        }));
     }
 
     async removeWordLibrary(index) {
         await this.setState(prevState => ({
             library: prevState.library.filter((word, i) => i !== index)
-        }))
-        await localStorage.setItem('library', JSON.stringify(this.state.library)) 
+        }));
+
+        await localStorage.setItem('library', JSON.stringify(this.state.library));
     }
 
     async addWordToLibrary() {
@@ -44,31 +47,35 @@ class Page extends React.Component {
             if (result.translate) {
                 await this.setState(() => ({
                 translation: result.translate
-                }))
-            }
+                }));
+            };
+
             await this.setState(prevState => ({
-                library: [...prevState.library, {id: this.state.library.length, word: this.state.value, translate: this.state.translation}]
-            }))
-            await localStorage.setItem('library', JSON.stringify(this.state.library)) 
-            await this.changeMode()
+                library: [...prevState.library, {id: this.state.library.length, word: this.state.value, translate: this.state.translation, correct: 0, learn: 0, error: 0}]
+            }));
+
+            await localStorage.setItem('library', JSON.stringify(this.state.library));
+            await this.changeMode();
             await this.setState(() => ({
                 translation: ''
-                }))
+                }));
 
             }
             catch (error) {
-                console.log(error)
-            }
+                console.log(error);
+            };
     }
      async getValue(event) {
-        const value = event.currentTarget.value
-            this.setState(() => ({
+        const value = event.currentTarget.value;
+            this.setState( () => ({
             value: value
-            }))
-        
+            }));
+    }
+
+    checkWord() {
+        //let s = this.wordsRef[1]
     }
         
-
     render() {
         return (
             <div className="page-container">
@@ -92,7 +99,9 @@ class Page extends React.Component {
                             <div>Learn level</div>
                         </div>
                         {this.state.library.map((word, index) => (
-                            <div key={index}>
+                            <div key={index}
+                            ref={el => this.wordsRef[index] = el}
+                            >
                                 <div>
                                     {word.id}
                                 </div>
@@ -104,11 +113,11 @@ class Page extends React.Component {
                                 </div>
                                 <div onClick={() => this.removeWordLibrary(index)}>Delete</div>
                             </div>
-                        ))}
-                        
+                        ))}                        
                     </div>
+                    {/*<button onClick={this.checkWork}></button>*/}
             </div>
-        )
+        );
     }
 
 }

@@ -54,6 +54,7 @@ a.active {
   font-weight: 900;
   font-style: 36px;
   line-height: 42px;
+  white-space: nowrap;
   color: #6ff3c8;
 }
 
@@ -182,7 +183,7 @@ a.active {
   position: absolute;
   right: 50px;
   color: darkgreen;
-  top: 20px;
+  top: 20px; 
 }
 
 .add-word-container {
@@ -356,9 +357,9 @@ padding: 4px 15px;
 
 .btn-exit {
   position: absolute;
-  width: 239px;
-  height: 68px;
-  left: 43px;
+  width: 176px;
+  height: 48px;
+  left: 42px;
   top: 32px;
   background: #036344;
   border: none;
@@ -368,14 +369,14 @@ padding: 4px 15px;
 
 .correct-title {
   font-size: 24px;
-  line-height: 28px;
-  color: #906a31;
+  line-height: 20px;
+  color: #006a31;
   margin-right: 15px;
 }
 
 .error-title {
   font-size: 24px;
-  line-height: 28px;
+  line-height: 20px;
   color: #680000;
 }
 
@@ -385,7 +386,7 @@ padding: 4px 15px;
   top: 40px;
 }
 
-.mode-page{
+.mode-page a{
   text-decoration: none;
 }
 
@@ -393,20 +394,19 @@ padding: 4px 15px;
   font-weight: 200;
   font-size: 24px;
   line-height: 28px;
-  margin-bottom: 148px;
+  margin-bottom: 140px;
   color: #000;
 }
 
 .mode-title-word{
   font-size: 144px;
   line-height: 169px;
-  display: flex;
   align-items: center;
-  text-align: center;
   color: #036344;
 }
 
 .check-item-block{
+  background: #fff;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 30px;
@@ -416,15 +416,43 @@ padding: 4px 15px;
   background: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 30px;
+  font-weight: 300px;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  color: #516961;
 }
 
 .mode-wraper{
   display: grid;
   align-items: start;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-content: center;
   row-gap: 10px;
   text-align: center;
+}
+
+
+.input-block {
+	display: grid;
+	align-items: center;
+	grid-template-columns: 8fr 2fr;
+	column-gap: 10px;
+}
+
+.customInput {
+	position: relative;
+	border: none;
+	background: transparent;
+	padding: 8px 13px;
+	border-bottom: 1px solid #084934;
+}
+
+.btn-enter {
+	background-color: #084934;
+	color: white;
+	padding: 8px;
+	border: none;
 }
