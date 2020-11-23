@@ -20,7 +20,7 @@ class Page extends React.Component {
             document.addEventListener('keydown', (event) => {
                 if(this.state.value.length > 0 && this.state.isOpen && event.key === 'Enter') {
                     this.addWordToLibrary();
-                };
+                }
             });
     }
 
@@ -40,7 +40,9 @@ class Page extends React.Component {
 
     async addWordToLibrary() {
         try {
-            const response = await fetch(`http://tmp.myitschool.org/API/translate/?&sourse=en&target=ru&word=${this.state.value}`) 
+            const response = await fetch(`http://tmp.myitschool.org/API/translate/?source=ru&target=en&word=${this.state.value}`, {
+                'method': 'GET'
+            });
         
             const result = await response.json();
             

@@ -12,7 +12,7 @@ const Learn = ({ setScore, score, CheckLevel}) => {
     const nextWord = () => {
         if (library.length -1 !== index) {
         setIndex(index+1);
-        setScore(score + 0.5);
+        setScore(score);
         CheckLevel();
         library[index].learn = library[index].learn + 1;
         localStorage.setItem('library', JSON.stringify(library));
@@ -23,7 +23,7 @@ const Learn = ({ setScore, score, CheckLevel}) => {
     return (
         <div className='learn-wrapper'>
             <div className='learn-container'>
-    {!end ? <div className='percentage'>{Math.floor((word.learn + word.correct - word.error) / 5*100)}%</div> :
+    {!end ? <div className='percentage'>{Math.floor((word.learn + word.correct - word.error) *2)}%</div> :
                 null}
                     <div className='word-translation'>
                         {!end ? word.translate : 

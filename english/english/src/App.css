@@ -7,7 +7,7 @@
 .nav {
   position: absolute;
   width: 281px;
-  height: 1024px;
+  height: 100vh;
   left: 0;
   top: 0;
   background: #20b887;
@@ -17,10 +17,10 @@
   display: grid;
   row-gap: 30px;
   list-style-type: none;
-  padding: 0;
   margin: 0;
   color: white;
   padding: 250px 0 0 0;
+  text-decoration: none
 }
 
 .nav-container a{
@@ -37,7 +37,6 @@ a.active {
   background: #f9f8ff;
   color: #20b887;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 15px;
   margin-right: -30px;
 }
 
@@ -56,6 +55,18 @@ a.active {
   line-height: 42px;
   white-space: nowrap;
   color: #6ff3c8;
+}
+
+.app-wrapper {
+  height: 100vh;
+	display: grid;
+  grid-auto-flow: column;
+  
+	background-image: url("./img/learn.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position-x: 280px;
 }
 
 .btn-round:focus {
@@ -81,11 +92,6 @@ a.active {
 
 .close {
   transform: rotate(45deg);
-}
-
-.app-wrapper {
-  display: grid;
-  grid-auto-flow: column;
 }
 
 .label-title {
